@@ -1,4 +1,4 @@
-# CAD-IT-TEST
+# Folkatech Test
 ### Installation
 
 ##  Install nodeJS If not yet installed
