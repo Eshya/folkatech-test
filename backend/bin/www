@@ -5,7 +5,8 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('chick-in-server:server');
+var debug = require('debug')(`${process.env.npm_package_name}:server`);
+const chalk = require('chalk')
 var http = require('http');
 // var socketApi = require('../configs/socket.conf')
 
@@ -90,5 +91,4 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
 module.exports = server
