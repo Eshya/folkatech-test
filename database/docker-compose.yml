@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  mongo-database:
+    container_name: mongo-database
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db:/data/db
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    env_file:
+      - ./.env
