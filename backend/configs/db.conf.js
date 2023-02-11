@@ -8,7 +8,6 @@ const options = {
     useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
     dbName,
 };
 

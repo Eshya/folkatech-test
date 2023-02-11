@@ -5,20 +5,22 @@ services:
     container_name: mongo-database
     image: mongo:latest
     ports:
-      - 27017:27017
+      - 27018:27017
     volumes:
-      - ./database/db:/data/db
+      - ./database/data/db:/data/db:rw
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
     env_file:
       - ./database/.env
+    security_opt:
+      - apparmor:unconfined
+      - seccomp:unconfined
     
   backend-nodejs:
     container_name: backend-nodejs
     build: ./backend
     ports:
       - 3000:3000
-      - 5000:5000
     links:
       - mongo-database
     depends_on: 

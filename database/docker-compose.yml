@@ -1,14 +1,18 @@
-version: "3"
-
+version: "3.1"
+# this file is for independent docker mongodb server
 services:
   mongo-database:
-    container_name: mongo-database
+    container_name: mongo-database-test
     image: mongo:latest
+    restart: always
     ports:
-      - "27017:27017"
+      - 27018:27017
     volumes:
-      - ./db:/data/db
+      - ./data/db:/data/db:rw
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
     env_file:
       - ./.env
+    security_opt:
+      - apparmor:unconfined
+      - seccomp:unconfined
