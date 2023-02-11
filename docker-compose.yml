@@ -29,6 +29,7 @@ services:
   backend-nodejs:
     container_name: backend-nodejs
     build: ./backend
+    image: eshya/folkatech-test:latest
     ports:
       - 3000:3000
     links:
