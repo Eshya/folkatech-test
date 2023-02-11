@@ -14,14 +14,16 @@ const loginCtrl = (req, res, next) => {
     // user.expireAt = moment().add(12, req.body.rememberMe ? 'd' : 'h');
     const token = jwt.sign(user.toJSON(), JWT_SECRET);
     res.json({token, user});
-}
+};
 
 const logoutCtrl = (req, res, next) => {
-    Promise.all([req.logout(), res.clearCookie('conect.sid')])
-    .then(() => {
-        res.json({message: 'Logged out!'});
-    }, (err) => next(err));
-}
+    Promise.all([req.logout(), res.clearCookie('conect.sid')]).then(
+        () => {
+            res.json({message: 'Logged out!'});
+        },
+        (err) => next(err)
+    );
+};
 
 const auth = passport.authenticate('basic', {failureRedirect: '/login'});
 router.post('/login', auth, loginCtrl);

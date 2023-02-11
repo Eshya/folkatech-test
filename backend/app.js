@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -17,15 +17,17 @@ var app = express();
 
 app.use(logger('dev'));
 app.use(express.json({limit: '100mb'}));
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
+app.use(express.urlencoded({limit: '100mb', extended: true}));
 app.use(cookieParser());
-app.use(session({
-    secret: 'jasoid98qy93r8yq3hhashd0909has',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {maxAge: 1000 * 60 * 60 * 6},
-    store: new MongoStore({mongooseConnection: db.connection})
-}))
+app.use(
+    session({
+        secret: 'jasoid98qy93r8yq3hhashd0909has',
+        resave: false,
+        saveUninitialized: false,
+        cookie: {maxAge: 1000 * 60 * 60 * 6},
+        store: new MongoStore({mongooseConnection: db.connection}),
+    })
+);
 app.use(compression());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -35,6 +37,6 @@ app.use(express.static(path.join(__dirname, staticFile)));
 
 app.all('/*', (req, res, next) => {
     res.sendFile('index.html', {root: staticFile});
-})
+});
 
 module.exports = app;

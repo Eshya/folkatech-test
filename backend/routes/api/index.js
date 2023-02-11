@@ -5,14 +5,14 @@ const debug = require('debug')(`${projectName}:api`);
 
 const fs = require('fs');
 const files = fs.readdirSync(__dirname);
-files.forEach((endpoint)=>{
-    if (endpoint!='index.js') {
-      debug(endpoint);
-      router.use(`/${endpoint}`, require(`./${endpoint}`));
+files.forEach((endpoint) => {
+    if (endpoint != 'index.js') {
+        debug(endpoint);
+        router.use(`/${endpoint}`, require(`./${endpoint}`));
     }
-  });
-  
-router.get('/', (req, res, next)=>{
+});
+
+router.get('/', (req, res, next) => {
     res.send(createError(401, `You're not allowed`));
 });
 module.exports = router;
