@@ -49,13 +49,11 @@ RUN TEST
 **Docker Hub Eshya**: [https://hub.docker.com/r/eshya/folkatech-test/tags](https://hub.docker.com/r/eshya/folkatech-test/tags)
 
 
-### User Login And Password can be changed in .env folder backend
+### User Login And Password can be changed in .env folder backend or docker-compose environment
 
 Default
 ``` DISPOSABLE_LOGIN_UNAME=root ```
 ``` DISPOSABLE_LOGIN_PWD=password ```
-
-
 
 
 
@@ -64,7 +62,8 @@ Default
 For API Testing , you can import postman data from postman folder
 Things to note when trying the API are
 1. setup ```{{url}}``` environment variable . default setup is ```http://localhost:{{SERVER_PORT}}``` 
-2. check auth collection login request is basic auth is in accordance with backend/.env **DISPOSABLE_LOGIN_UNAME** and **DISPOSABLE_LOGIN_PWD** 
+2. check auth collection login request is basic auth is in accordance with backend/.env (if stand alone) or docker-compose environment**DISPOSABLE_LOGIN_UNAME** and **DISPOSABLE_LOGIN_PWD** 
+3. You can open postman from this link too **Postman Eshya**: [https://www.postman.com/eshya06/workspace/folkatech-eshya-test](https://www.postman.com/eshya06/workspace/folkatech-eshya-test) 
 
 ### Connect to MongoDB
 
