@@ -4,6 +4,8 @@ services:
   mongo-database:
     container_name: mongo-database
     image: mongo:latest
+    # uncomment this if you want know mongodb log
+    command: mongod --quiet --logpath /dev/null
     ports:
       - 27018:27017
     volumes:
@@ -36,6 +38,7 @@ services:
       DB_NAME: folkatech
       MONGO_CONNECTIONSTRING: "mongodb://root:password@mongo-database:27017"
       REDIS_PATH: 0
+      # Mode Redis => IF 1 -> using redis as cache layer ; ELSE -> just using mongoose layer
       REDISMODE: 1
       REDIS_HOST: cache
       REDIS_PORT: 6379

@@ -1,11 +1,12 @@
 const Model = require('./users.model');
 const mongoose = require('mongoose')
 const {createError,parseQuery} = require('../../helpers');
-
+const {clearKey} = require('../../../configs/redis.conf')
+// For using cache layer , you must impl .cache() after query mongoose 
 const _find = async (req) => {
     const {limit, offset, where, sort} = parseQuery(req.query);
-    const count = Model.countDocuments(where);
-    const model = Model.find(where).limit(limit).skip(offset).sort(sort);
+    const count = Model.countDocuments(where).cache();
+    const model = Model.find(where).limit(limit).skip(offset).sort(sort).cache();
     const result = await Promise.all([count, model]);
     return {length: result[0], data: result[1]};
 };
@@ -54,7 +55,7 @@ exports.findById = async (req, res, next)=>{
       if (!mongoose.isValidObjectId(req.params.id)) {
         return res.status(404).json({ message: 'The resource you are looking for could not be found.' });
       }
-      const result = await Model.findById(req.params.id);
+      const result = await Model.findById(req.params.id).cache();
       res.json({
         data: result,
         message: 'OK',
@@ -68,6 +69,7 @@ exports.findById = async (req, res, next)=>{
     let result = []
     try {
         const resultUser = await createUser({userName, emailAddress, accountNumber, identifyNumber}, res)
+        clearKey(Model.collection.collectionName);
         result.push(resultUser)
         res.json({
           data: result,
@@ -98,6 +100,7 @@ exports.findById = async (req, res, next)=>{
         if(findNumber !== null) return res.json({error: 1014, message: 'identify number already registered'})
       }
       const result = await Model.findByIdAndUpdate(id, data, {new: true}).exec();
+      clearKey(Model.collection.collectionName);
       res.json({
         data: result,
         message: 'OK',
@@ -109,6 +112,7 @@ exports.findById = async (req, res, next)=>{
   exports.removeById = async (req, res, next)=>{
     try {
       const result = await Model.delete({_id: req.params.id}).exec();
+      clearKey(Model.collection.collectionName);
       res.json({
         data: result,
         message: 'OK',
