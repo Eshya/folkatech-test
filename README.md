@@ -71,6 +71,12 @@ Things to note when connect to mongodb
 1. For connecting mongodb within docker using url ```"mongodb://root:mongo-database@localhost:27017"```
 2. Connecting mongodb from outside application using url ```"mongodb://root:localhost@localhost:27018"```
 
+### Connect to Redis Server
+
+Things to note when connect to redis server
+1. For connecting redis server within docker using url you can connect ```host=cache ; port={{REDIS_PORT}} ; and password={{REDIS_PASSWORD}}```
+2. Connecting redis server from outside application using ```host=localhost```
+
 ### Problems that are frequently encountered
 
 change MONGODB_URL_LOCAL in backend/.env with IP-DOCKER = your_docker_ip
