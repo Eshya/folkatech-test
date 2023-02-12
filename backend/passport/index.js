@@ -34,12 +34,20 @@ passport.use(
             jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
             secretOrKey: JWT_SECRET,
         },
-        async ({username}, done) => {
+        async ({userName,role}, done) => {
             try {
-                const users = await Users.findOne({
-                    username,
-                }).populate('roles');
-                return done(null, users);
+                if(userName == process.env.DISPOSABLE_LOGIN_UNAME && role == "admin"){
+                    const users = {userName:"root",role:"admin"}
+                    return done(null, users);
+                }
+                else{
+                    return done(err, null);
+                }
+                // const users = await Users.findOne({
+                //     username,
+                // }).populate('roles');
+                // console.log(userName)
+                // return done(null, users);
             } catch (err) {
                 return done(err, null);
             }

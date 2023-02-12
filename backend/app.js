@@ -38,5 +38,12 @@ app.use(express.static(path.join(__dirname, staticFile)));
 app.all('/*', (req, res, next) => {
     res.sendFile('index.html', {root: staticFile});
 });
+app.use(function (err, req, res, next) {
+    if (err.status === 401) {
+      res.status(401).send({error:'Wrong Password'});
+    } else {
+      next(err);
+    }
+});
 
 module.exports = app;

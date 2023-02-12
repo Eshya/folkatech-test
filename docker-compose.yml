@@ -30,6 +30,18 @@ services:
     container_name: backend-nodejs
     build: ./backend
     image: eshya/folkatech-test:latest
+    environment:
+      SERVER_PORT: 3000
+      JWT_SECRET: 'Psstt!!j4n64nKas1t4u!!1!'
+      DB_NAME: folkatech
+      MONGO_CONNECTIONSTRING: "mongodb://root:password@mongo-database:27017"
+      REDIS_PATH: 0
+      REDISMODE: 1
+      REDIS_HOST: cache
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      DISPOSABLE_LOGIN_UNAME: root
+      DISPOSABLE_LOGIN_PWD: password
     ports:
       - 3000:3000
     links:
