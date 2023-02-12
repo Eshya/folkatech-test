@@ -6,21 +6,20 @@ const jwt = require('jsonwebtoken');
 const {JWT_SECRET} = require('../../passport/secret');
 
 const loginCtrl = (req, res, next) => {
-    try{
+    try {
         const origin = req.get('origin');
         console.log('---origin---');
         console.log(origin);
         console.log('---origin---');
-    
+
         const user = req.user;
         // user.expireAt = moment().add(12, req.body.rememberMe ? 'd' : 'h');
         const token = jwt.sign(user, JWT_SECRET);
         res.json({token, user});
-    }catch (error) {
+    } catch (error) {
         const errorMessage = error.statusText || error.message;
         res.status(error.status || 500).send(errorMessage);
     }
-    
 };
 
 // const logoutCtrl = (req, res, next) => {
@@ -34,7 +33,7 @@ const loginCtrl = (req, res, next) => {
 const logoutCtrl = (req, res, next) => {
     req.logout(function (err) {
         if (err) return next(err);
-        res.clearCookie('connect.sid', { path: '/' });
+        res.clearCookie('connect.sid', {path: '/'});
         res.json({message: 'Logged out!'});
     });
 };

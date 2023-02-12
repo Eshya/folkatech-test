@@ -13,20 +13,21 @@ exports.after = after;
 const parse = (sort) => {
     const keys = Object.keys(sort);
     if (keys.length) {
-      keys.forEach((k) => {
-        sort[k] = parseInt(sort[k]);
-      });
+        keys.forEach((k) => {
+            sort[k] = parseInt(sort[k]);
+        });
     } else {
-      sort = {};
+        sort = {};
     }
     return sort;
 };
-  
+
 exports.parseQuery = (query) => {
-    const limit = (query.limit === null || query.limit === undefined)? 50 : query.limit;
+    const limit =
+        query.limit === null || query.limit === undefined ? 50 : query.limit;
     const offset = query.offset || 0;
-    const where = query.where? query.where : {};
-    const sort = query.sort? sortParser.parse(query.sort) : {};
+    const where = query.where ? query.where : {};
+    const sort = query.sort ? sortParser.parse(query.sort) : {};
     const search = query.search || '';
     // console.log({ limit, offset, where, sort, search})
     return {limit, offset, where, sort, search};

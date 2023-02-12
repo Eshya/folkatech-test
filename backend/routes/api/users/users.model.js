@@ -12,8 +12,8 @@ const scheme = new Schema(
             required: true,
         },
         accountNumber: {
-            type:Number,
-            required: true
+            type: Number,
+            required: true,
         },
         identifyNumber: {
             type: Number,

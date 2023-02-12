@@ -40,9 +40,9 @@ app.all('/*', (req, res, next) => {
 });
 app.use(function (err, req, res, next) {
     if (err.status === 401) {
-      res.status(401).send({error:'Wrong Password'});
+        res.status(401).send({error: 'Wrong Password'});
     } else {
-      next(err);
+        next(err);
     }
 });
 
